@@ -1,5 +1,5 @@
---
-
+---
+from bookshelf.models import Book
 ### 5.4. Delete  
 Delete the book instance and confirm deletion:
 
