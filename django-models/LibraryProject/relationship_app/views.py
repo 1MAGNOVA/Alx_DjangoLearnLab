@@ -1,4 +1,5 @@
 from .models import Book
+from .models import relationship_app
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
