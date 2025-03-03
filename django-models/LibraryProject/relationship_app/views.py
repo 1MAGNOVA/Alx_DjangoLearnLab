@@ -14,6 +14,11 @@ def ListView(request):
     context = {'list_books':books}
     return render(request, "relationship_app/list_books.html", {"books":books} ) 
 
+def list_books(request):
+    books = Book.objects.all()
+    book_list = "\n".join([f"{book.title} by {book.author.name}" for book in books])
+    return HttpResponse(book_list, content_type="text/plain")
+
 #Create a class-based view 
 def BookDetailView(DetailView):
     model = Book
