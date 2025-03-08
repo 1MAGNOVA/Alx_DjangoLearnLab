@@ -3,7 +3,7 @@ from .models import relationship
 from .models import Library
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
-from django.contrib.auth.views import LoginView
+from django.contrib.auth import login, logout, registration
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
