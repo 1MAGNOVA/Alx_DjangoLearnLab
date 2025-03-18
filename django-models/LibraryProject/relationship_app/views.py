@@ -23,17 +23,34 @@ def BookDetailView(DetailView):
     template_name = "relationship_app/library_detail.html"
 
 
-
-
-""" Utilize Django’s built-in views and forms for handling user authentication. You will need to create views for user login, logout, and registration.
- user  login, logout , registeration: """
-
 # create new user:
 user = User.objects.create_user("john", "lennon@thebeatles.com", "johnpassword")
 
 #logins and registration:
-class SignUpView(CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'
+def user_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')  # Redirect to home or dashboard
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+def user_logout(request):
+    logout(request)
+    return render(request, 'logout.html')
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
 
